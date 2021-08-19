@@ -17,6 +17,7 @@ spec:
     spec:
       containers:
       - image: antje12/backend:latest
+        imagePullPolicy: Always
         name: backend
         env:
           - name: REDIS_DNS

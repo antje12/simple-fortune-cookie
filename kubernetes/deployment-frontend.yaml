@@ -17,6 +17,7 @@ spec:
     spec:
       containers:
       - image: antje12/frontend:latest
+        imagePullPolicy: Always
         name: frontend
         env:
         - name: BACKEND_DNS
