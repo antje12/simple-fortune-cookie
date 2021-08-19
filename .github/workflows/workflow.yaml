@@ -35,7 +35,9 @@ jobs:
         with:
           context: ./frontend
           push: true
-          tags: [${{ secrets.DOCKER_USERNAME }}/frontend:GA-${{ github.sha }}, ${{ secrets.DOCKER_USERNAME }}/frontend:latest]
+          tags: 
+            - ${{ secrets.DOCKER_USERNAME }}/frontend:GA-${{ github.sha }} 
+            - ${{ secrets.DOCKER_USERNAME }}/frontend:latest
 
   Build-Backend:
     name: build-backend-job
@@ -59,7 +61,9 @@ jobs:
         with:
           context: ./backend
           push: true
-          tags: [${{ secrets.DOCKER_USERNAME }}/backend:GA-${{ github.sha }}, ${{ secrets.DOCKER_USERNAME }}/backend:latest]
+          tags: 
+            - ${{ secrets.DOCKER_USERNAME }}/backend:GA-${{ github.sha }}
+            - ${{ secrets.DOCKER_USERNAME }}/backend:latest
 
   Deploy:
     name: kubernetes-deploy
