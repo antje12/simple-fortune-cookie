@@ -1,78 +1,15 @@
-name: Java CI
+name: Fortune Cookie CI
 on: push
 env:
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
 jobs:
-  Clone-down:
-    name: clone-down-job
+  
+  Test:
+    name: test-job
     runs-on: ubuntu-latest
     steps:
       - name: checkout-step
         uses: actions/checkout@v2
-      - name: upload-repo
-        uses: actions/upload-artifact@v2
-        with:
-          name: code
-          path: .
-  Build:
-    name: build-job
-    runs-on: ubuntu-latest
-    needs: Clone-down
-    steps:
-      - name: download-repo
-        uses: actions/download-artifact@v2
-        with:
-          name: code
-          path: .
-      - name: docker-compose
-        run: docker-compose up -d
-      - name: build-step
-        run: ci/build-app.sh
-      - name: upload-repo
-        uses: actions/upload-artifact@v2
-        with:
-          name: code
-          path: .
-  Test:
-    name: test-job
-    runs-on: ubuntu-latest
-    container: gradle:6-jdk11
-    needs: Clone-down
-    steps:
-      - name: download-repo
-        uses: actions/download-artifact@v2
-        with:
-          name: code
-          path: .
-      - name: set-permissions
-        run: chmod +x ci/unit-test-app.sh
-      - name: test-step
-        run: ci/unit-test-app.sh
-  
-  Docker-image:
-    name: docker-image-job
-    runs-on: ubuntu-latest
-    needs: [Build, Test]
-    steps:
-      - name: download-repo
-        uses: actions/download-artifact@v2
-        with:
-          name: code
-          path: .
-      - name: build docker
-        run: chmod +x ci/build-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && ci/build-docker.sh
-      - name: push docker
-        run: chmod +x ci/push-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && ci/push-docker.sh
-  Component-test:
-    name: component-test-job
-    runs-on: self-hosted
-    needs: Docker-image
-    steps:
-      - name: Download code
-        uses: actions/download-artifact@v2
-        with:
-          name: code
-          path: .
-      - name: Execute component test
-        run: chmod +x ci/component-test.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && ci/component-test.sh
+      - name: run-test-step
+        run: go test ./frontend
