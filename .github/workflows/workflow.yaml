@@ -18,13 +18,20 @@ jobs:
     runs-on: ubuntu-latest
     needs: Test
     steps:
-      - name: checkout-step
-        uses: actions/checkout@v2
-      - name: build docker
-        run: ci/build-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && ci/frontend/build-docker.sh "frontend"
-      - name: push docker
-        run: ci/push-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && export ENV_NAME="frontend" && ci/push-docker.sh
-  
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      -
+        name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/frontend:latest
+
   Build-Backend:
     name: build-backend-job
     runs-on: ubuntu-latest
