@@ -16,7 +16,7 @@ spec:
         app: deployment-backend
     spec:
       containers:
-      - image: antje12/backend:latest
+      - image: antje12/backend:{IMG_TAG}
         imagePullPolicy: Always
         name: backend
         env:

@@ -16,7 +16,7 @@ spec:
         app: deployment-frontend
     spec:
       containers:
-      - image: antje12/frontend:latest
+      - image: antje12/frontend:{IMG_TAG}
         imagePullPolicy: Always
         name: frontend
         env:

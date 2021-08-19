@@ -68,5 +68,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Change frotnend deploy file tags
+        run: sed -i "s+{IMG_TAG}+GA-${{ github.sha }}+g" ./kubernetes/deployment-frontend.yaml
+      - name: Change backend deploy file tags
+        run: sed -i "s+{IMG_TAG}+GA-${{ github.sha }}+g" ./kubernetes/deployment-backend.yaml
       - name: Deploy to Kubernetes
         run: kubectl apply -f ./kubernetes
