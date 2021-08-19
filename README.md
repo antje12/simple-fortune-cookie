@@ -1,3 +1,6 @@
+# Plan of attack
+https://docs.google.com/document/d/1PN72717-4GfMRmOuG7YMh7ZdLviyiJfAkHZR3MDE_QY/edit?usp=sharing
+
 # Simple Fortune Cookie
 
 A project in Go for you to apply all the awesome things
