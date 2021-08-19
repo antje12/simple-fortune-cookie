@@ -1,21 +1,22 @@
 version: '3.1'
-
 services:
 
-  redis_container:
-    image: redis
+  redis:
+    image: "redis:4"
+    container_name: cache
     ports:
-      - 8080:80
-    environment:
-      - WORDPRESS_DB_USER=root
-      - WORDPRESS_DB_PASSWORD=wordpress
-      - WORDPRESS_DB_HOST=mysql_container
-      - WORDPRESS_DB_NAME=wordpressdb
-    depends_on:
-      - mysql_container
+      - 6379:6379
 
-  mysql_container:
-    image: mysql:5.7
+  backend_container:
+    build: ./backend
     environment:
-      - MYSQL_ROOT_PASSWORD=wordpress
-      - MYSQL_DATABASE=wordpressdb
+      - REDIS_DNS=redis://cache
+    ports:
+      - 9000:9000
+    depends_on: [redis]
+
+  frontend_container:
+    build: ./frontend
+    ports:
+      - 8080:8080
+    depends_on: [backend_container]
