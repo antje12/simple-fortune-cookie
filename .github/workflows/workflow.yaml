@@ -74,3 +74,11 @@ jobs:
         run: sed -i "s+{IMG_TAG}+GA-${{ github.sha }}+g" ./kubernetes/deployment-backend.yaml
       - name: Deploy to Kubernetes
         run: kubectl apply -f ./kubernetes
+
+  Kubernetes-Test:
+    name: kubernetes-test
+    runs-on: self-hosted
+    needs: Deploy
+    steps:
+      - name: Curl
+        run: bash ./scripts/kubernetes-test.sh
