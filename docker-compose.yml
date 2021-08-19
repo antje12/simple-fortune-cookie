@@ -2,21 +2,24 @@ version: '3.1'
 services:
 
   redis:
-    image: "redis:4"
-    container_name: cache
+    image: "redis:alpine"
     ports:
       - 6379:6379
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
 
   backend_container:
     build: ./backend
-    environment:
-      - REDIS_DNS=redis://cache
     ports:
       - 9000:9000
     depends_on: [redis]
+    environment:
+      - REDIS_DNS=redis
 
   frontend_container:
     build: ./frontend
     ports:
       - 8080:8080
+    environment:
+      - BACKEND_DNS=backend_container
     depends_on: [backend_container]
