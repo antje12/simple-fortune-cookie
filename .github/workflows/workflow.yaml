@@ -62,9 +62,11 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/backend:latest
 
   Deploy:
-    name: build-backend-job
-    runs-on: ubuntu-latest
+    name: kubernetes-deploy
+    runs-on: self-hosted
     needs: [Build-Frontend, Build-Backend]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Deploy to Kubernetes
+        run: kubectl apply -f ./kubernetes
