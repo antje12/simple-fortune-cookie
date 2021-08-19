@@ -1,0 +1,23 @@
+# TODO
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: deployment-backend
+  name: deployment-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-backend
+  template:
+    metadata:
+      labels:
+        app: deployment-backend
+    spec:
+      containers:
+      - image: antje12/backend:latest
+        name: backend
+        env:
+          - name: REDIS_DNS
+            value: service-redis

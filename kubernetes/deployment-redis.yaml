@@ -1,0 +1,23 @@
+# TODO
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: deployment-redis
+  name: deployment-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-redis
+  template:
+    metadata:
+      labels:
+        app: deployment-redis
+    spec:
+      containers:
+      - image: redis:alpine
+        name: redis
+        env:
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"

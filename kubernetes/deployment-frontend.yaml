@@ -1,0 +1,23 @@
+# TODO
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: deployment-frontend
+  name: deployment-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-frontend
+  template:
+    metadata:
+      labels:
+        app: deployment-frontend
+    spec:
+      containers:
+      - image: antje12/frontend:latest
+        name: frontend
+        env:
+        - name: BACKEND_DNS
+          value: service-backend

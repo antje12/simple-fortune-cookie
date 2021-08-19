@@ -1,0 +1,15 @@
+# TODO
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: deployment-backend
+  name: service-backend
+spec:
+  ports:
+  - port: 9000
+    protocol: TCP
+    targetPort: 9000
+  selector:
+    app: deployment-backend
+  type: ClusterIP
