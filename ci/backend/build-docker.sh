@@ -1,4 +1,4 @@
 #!/bin/bash
 [[ -z "${GIT_COMMIT}" ]] && Tag='local' || Tag="${GIT_COMMIT::4}"
 [[ -z "${docker_username}" ]] && DockerRepo='' || DockerRepo="${docker_username}/"
-docker build -t "$docker_username/${ENV_NAME}:latest" -t "$docker_username/${ENV_NAME}:1.0-$Tag" ./$ENV_NAME
+docker build -t "${DockerRepo}backend:latest" -t "${DockerRepo}backend:1.0-$Tag" ./backend

@@ -21,7 +21,7 @@ jobs:
       - name: checkout-step
         uses: actions/checkout@v2
       - name: build docker
-        run: ci/build-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && ci/build-docker.sh "frontend"
+        run: ci/build-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && ci/frontend/build-docker.sh "frontend"
       - name: push docker
         run: ci/push-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && export ENV_NAME="frontend" && ci/push-docker.sh
   
@@ -33,6 +33,6 @@ jobs:
       - name: checkout-step
         uses: actions/checkout@v2
       - name: build docker
-        run: ci/build-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA" ENV_NAME="backend" && ci/build-docker.sh
+        run: ci/build-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && ci/backend/build-docker.sh
       - name: push docker
-        run: ci/push-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA" ENV_NAME="backend" && ci/push-docker.sh
+        run: ci/push-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA" && export ENV_NAME="backend" && ci/push-docker.sh
