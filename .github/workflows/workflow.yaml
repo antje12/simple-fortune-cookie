@@ -4,35 +4,36 @@ env:
   docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.DOCKER_PASSWORD }}
 jobs:
+  Lint:
+    name: lint-job
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: checkout-step
+        uses: actions/checkout@v2
+      - name: go-lint-backend
+        uses: Jerome1337/golint-action@v1.0.2
+        with:
+          golint-path: './backend'
+      - name: go-lint-frontend
+        uses: Jerome1337/golint-action@v1.0.2
+        with:
+          golint-path: './frontend'
+
   Test:
     name: test-job
     runs-on: ubuntu-latest
+    needs: Lint
     steps:
       - name: checkout-step
         uses: actions/checkout@v2
       - name: run-test-step
         run: go test ./frontend
   
-  Lint:
-    name: lint-job
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    needs: Test
-    steps:
-      - name: checkout-step
-        uses: actions/checkout@v2
-      - name: golangci-lint-backend
-        working-directory: ./backend
-        run: docker run --rm -v $(pwd):/app -w /app golangci/golangci-lint:v1.42.0 golangci-lint run
-      - name: golangci-lint-frontend
-        working-directory: ./frontend
-        run: docker run --rm -v $(pwd):/app -w /app golangci/golangci-lint:v1.42.0 golangci-lint run
-        
-  
   Build-Frontend:
     name: build-frontend-job
     runs-on: ubuntu-latest
-    needs: Lint
+    needs: Test
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -56,7 +57,7 @@ jobs:
   Build-Backend:
     name: build-backend-job
     runs-on: ubuntu-latest
-    needs: Lint
+    needs: Test
     steps:
       - name: Checkout
         uses: actions/checkout@v2
