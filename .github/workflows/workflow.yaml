@@ -108,4 +108,4 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Curl
-        run: bash ./scripts/kubernetes-test.sh
+        run: bash ./scripts/kubernetes-test.sh 0 32540
