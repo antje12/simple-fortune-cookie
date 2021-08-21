@@ -15,9 +15,16 @@ spec:
       labels:
         app: deployment-redis
     spec:
+      volumes:
+      - name: redis-volume
+        persistentVolumeClaim:
+          claimName: pvc-redis
       containers:
       - image: redis:alpine
         name: redis
         env:
         - name: ALLOW_EMPTY_PASSWORD
           value: "yes"
+        volumeMounts:
+        - mountPath: "/data"
+          name: redis-volume
