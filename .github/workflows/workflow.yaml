@@ -100,6 +100,7 @@ jobs:
           -f ./kubernetes/test-env/service-backend.yaml
           -f ./kubernetes/test-env/deployment-frontend.yaml
           -f ./kubernetes/test-env/service-frontend.yaml
+          -f ./kubernetes/test-env/test-ingress.yaml
 
   Test-Environment-Health-Test:
     name: test environment health test job
@@ -108,7 +109,7 @@ jobs:
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/development'
     steps:
       - name: Curl
-        run: bash ./scripts/kubernetes-test.sh 30 30418
+        run: bash ./scripts/kubernetes-test.sh 30 80
       - name: Teardown test environment
         if: always() 
         run: >- 
@@ -120,6 +121,7 @@ jobs:
           -f ./kubernetes/test-env/deployment-redis.yaml
           -f ./kubernetes/test-env/service-redis.yaml
           -f ./kubernetes/test-env/pvc-redis.yaml
+          -f ./kubernetes/test-env/test-ingress.yaml
 
   Production-Deploy:
     name: production deploy job
