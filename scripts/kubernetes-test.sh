@@ -17,3 +17,4 @@ done
 
 echo "All connection attempts were successful"
 exit 0
+
