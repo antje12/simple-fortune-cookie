@@ -5,12 +5,14 @@ import (
 	"github.com/gomodule/redigo/redis"
 	"log"
 	"sync"
+	"time"
 )
 
 var dbLink redis.Conn
 var usingRedis = false
 
 func init() {
+	time.Sleep(10 * time.Second)
 	conn, err := redis.Dial("tcp", fmt.Sprintf("%s:6379", getEnv("REDIS_DNS", "localhost")))
 	if err != nil {
 		log.Println("redis", err)
