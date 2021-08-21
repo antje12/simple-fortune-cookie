@@ -16,7 +16,7 @@ spec:
         app: test-deployment-redis
     spec:
       volumes:
-      - name: redis-volume
+      - name: test-redis-volume
         persistentVolumeClaim:
           claimName: test-pvc-redis
       containers:
