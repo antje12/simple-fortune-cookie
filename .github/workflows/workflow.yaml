@@ -109,17 +109,6 @@ jobs:
     steps:
       - name: Curl
         run: bash ./scripts/kubernetes-test.sh 30 80
-      - name: Teardown test environment
-        if: always() 
-        run: >- 
-          kubectl delete 
-          -f ./kubernetes/test-env/deployment-frontend.yaml
-          -f ./kubernetes/test-env/service-frontend.yaml
-          -f ./kubernetes/test-env/deployment-backend.yaml
-          -f ./kubernetes/test-env/service-backend.yaml
-          -f ./kubernetes/test-env/deployment-redis.yaml
-          -f ./kubernetes/test-env/service-redis.yaml
-          -f ./kubernetes/test-env/pvc-redis.yaml
 
   Production-Deploy:
     name: production deploy job
