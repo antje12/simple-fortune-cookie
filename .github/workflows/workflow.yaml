@@ -108,7 +108,7 @@ jobs:
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/development'
     steps:
       - name: Curl
-        run: bash ./scripts/kubernetes-test.sh 30 80
+        run: bash ./scripts/kubernetes-test.sh 30 31304
 
   Production-Deploy:
     name: production deploy job
