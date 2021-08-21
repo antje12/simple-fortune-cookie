@@ -23,12 +23,12 @@ jobs:
         uses: golangci/golangci-lint-action@v2
         with:
           version: v1.29
-          working-directory: ./backend
+          working-directory: backend/
       - name: golangci-lint-frontend
         uses: golangci/golangci-lint-action@v2
         with:
           version: v1.29
-          working-directory: ./frontend
+          working-directory: frontend/
   
   Build-Frontend:
     name: build-frontend-job
