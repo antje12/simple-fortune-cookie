@@ -65,7 +65,7 @@ jobs:
     name: kubernetes-deploy
     runs-on: self-hosted
     needs: [Build-Frontend, Build-Backend]
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -80,7 +80,7 @@ jobs:
     name: kubernetes-test
     runs-on: self-hosted
     needs: Deploy
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: Curl
         run: bash ./scripts/kubernetes-test.sh
