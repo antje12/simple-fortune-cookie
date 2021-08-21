@@ -1,0 +1,15 @@
+# TODO
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: test-deployment-redis
+  name: test-service-redis
+spec:
+  ports:
+  - port: 6380
+    protocol: TCP
+    targetPort: 6379
+  selector:
+    app: test-deployment-redis
+  type: ClusterIP

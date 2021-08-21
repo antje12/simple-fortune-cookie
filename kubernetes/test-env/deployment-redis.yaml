@@ -1,0 +1,30 @@
+# TODO
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: test-deployment-redis
+  name: test-deployment-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-deployment-redis
+  template:
+    metadata:
+      labels:
+        app: test-deployment-redis
+    spec:
+      volumes:
+      - name: redis-volume
+        persistentVolumeClaim:
+          claimName: test-pvc-redis
+      containers:
+      - image: redis:alpine
+        name: test-redis
+        env:
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
+        volumeMounts:
+        - mountPath: "/data"
+          name: test-redis-volume

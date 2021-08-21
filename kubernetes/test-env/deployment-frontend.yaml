@@ -1,0 +1,24 @@
+# TODO
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: test-deployment-frontend
+  name: test-deployment-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-deployment-frontend
+  template:
+    metadata:
+      labels:
+        app: test-deployment-frontend
+    spec:
+      containers:
+      - image: antje12/frontend:{IMG_TAG}
+        imagePullPolicy: Always
+        name: test-frontend
+        env:
+        - name: BACKEND_DNS
+          value: test-service-backend

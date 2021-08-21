@@ -1,0 +1,24 @@
+# TODO
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: test-deployment-backend
+  name: test-deployment-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-deployment-backend
+  template:
+    metadata:
+      labels:
+        app: test-deployment-backend
+    spec:
+      containers:
+      - image: antje12/backend:{IMG_TAG}
+        imagePullPolicy: Always
+        name: test-backend
+        env:
+          - name: REDIS_DNS
+            value: test-service-redis
