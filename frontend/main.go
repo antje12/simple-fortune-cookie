@@ -37,6 +37,8 @@ func HealthzHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 
+    rand.Seed(time.Now().UnixNano())
+
     http.HandleFunc("/healthz", HealthzHandler)
 
     http.HandleFunc("/api/random", func (w http.ResponseWriter, r *http.Request) {
