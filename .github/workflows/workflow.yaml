@@ -94,12 +94,12 @@ jobs:
         run: >- 
           kubectl apply 
           -f ./kubernetes/pvc-redis.yaml
-          -f ./kubernetes/deployment-redis.yaml 
-          -f ./kubernetes/service-redis.yaml 
-          -f ./kubernetes/deployment-backend.yaml 
-          -f ./kubernetes/service-backend.yaml 
-          -f ./kubernetes/deployment-frontend.yaml 
-          -f ./kubernetes/service-frontend.yaml 
+          -f ./kubernetes/deployment-redis.yaml
+          -f ./kubernetes/service-redis.yaml
+          -f ./kubernetes/deployment-backend.yaml
+          -f ./kubernetes/service-backend.yaml
+          -f ./kubernetes/deployment-frontend.yaml
+          -f ./kubernetes/service-frontend.yaml
 
   Kubernetes-Test:
     name: kubernetes-test
