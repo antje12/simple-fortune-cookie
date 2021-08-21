@@ -22,15 +22,12 @@ jobs:
       - name: checkout-step
         uses: actions/checkout@v2
       - name: golangci-lint-backend
-        uses: golangci/golangci-lint-action@v2
-        with:
-          version: v1.29
-          working-directory: ./backend
+        working-directory: ./backend
+        run: docker run --rm -v $(pwd):/app -w /app golangci/golangci-lint:v1.42.0 golangci-lint run
       - name: golangci-lint-frontend
-        uses: golangci/golangci-lint-action@v2
-        with:
-          version: v1.29
-          working-directory: ./frontend
+        working-directory: ./frontend
+        run: docker run --rm -v $(pwd):/app -w /app golangci/golangci-lint:v1.42.0 golangci-lint run
+        
   
   Build-Frontend:
     name: build-frontend-job
