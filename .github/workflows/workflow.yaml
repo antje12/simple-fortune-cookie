@@ -100,7 +100,6 @@ jobs:
           -f ./kubernetes/test-env/service-backend.yaml
           -f ./kubernetes/test-env/deployment-frontend.yaml
           -f ./kubernetes/test-env/service-frontend.yaml
-          -f ./kubernetes/test-env/test-ingress.yaml
 
   Test-Environment-Health-Test:
     name: test environment health test job
@@ -121,7 +120,6 @@ jobs:
           -f ./kubernetes/test-env/deployment-redis.yaml
           -f ./kubernetes/test-env/service-redis.yaml
           -f ./kubernetes/test-env/pvc-redis.yaml
-          -f ./kubernetes/test-env/test-ingress.yaml
 
   Production-Deploy:
     name: production deploy job
