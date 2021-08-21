@@ -13,6 +13,17 @@ jobs:
       - name: run-test-step
         run: go test ./frontend
   
+  Lint:
+    name: lint-job
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v2
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          version: v1.29
+  
   Build-Frontend:
     name: build-frontend-job
     runs-on: ubuntu-latest
