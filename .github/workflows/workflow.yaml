@@ -22,15 +22,15 @@ jobs:
       - name: checkout-step
         uses: actions/checkout@v2
       - name: golangci-lint-backend
+        working-directory: ./backend
         uses: golangci/golangci-lint-action@v2
         with:
           version: v1.29
-          working-directory: backend/
       - name: golangci-lint-frontend
+        working-directory: ./frontend
         uses: golangci/golangci-lint-action@v2
         with:
           version: v1.29
-          working-directory: frontend/
   
   Build-Frontend:
     name: build-frontend-job
