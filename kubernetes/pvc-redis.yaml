@@ -14,7 +14,7 @@ spec:
   accessModes:
     # Though accessmode is already defined in pv definition. It is still needed here.
     # - ReadWriteMany
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
